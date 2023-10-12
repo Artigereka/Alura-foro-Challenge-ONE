@@ -1,2 +1,8 @@
-package com.alura.foro.domain.topic.validators.service;public interface TopicValidService {
+package com.alura.foro.domain.topic.validators.service;
+
+import com.alura.foro.domain.topic.CreateTopic;
+
+public interface TopicValidService {
+    boolean isDuplicate(CreateTopic topic);
+
 }

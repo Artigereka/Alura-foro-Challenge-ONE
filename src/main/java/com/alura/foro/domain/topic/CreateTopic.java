@@ -1,11 +1,12 @@
 package com.alura.foro.domain.topic;
 
-public record TopicDetailsDTO(
-        String id,
-        String title,
-        String message,
-        String author,
-        String course
-) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record CreateTopic(
+        @NotBlank String title,
+        @NotBlank String body,
+        @NotNull Long userId,
+        @NotNull Long course) {
 
 }
