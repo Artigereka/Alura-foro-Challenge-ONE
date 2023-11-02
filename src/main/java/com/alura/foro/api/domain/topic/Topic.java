@@ -1,4 +1,4 @@
-package com.alura.foro.domain.topic;
+package com.alura.foro.api.domain.topic;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,14 +19,14 @@ public class Topic {
     private Long id;
     private String title;
     private String body;
-    private Long UserId;
+    private Long author;
     private Long course;
 
-    public Topic(CreateTopic createTopic){
-        this.title = createTopic.title();
-        this.body = createTopic.body();
-        this.UserId = createTopic.userId();
-        this.course = createTopic.course();
+    public Topic(CreateTopicDTO createTopicDTO){
+        this.title = createTopicDTO.title();
+        this.body = createTopicDTO.body();
+        this.author = createTopicDTO.author();
+        this.course = createTopicDTO.course();
     }
 
 }
