@@ -40,6 +40,7 @@ public class TopicController {
         Topic topic = new Topic(createTopicDTO);
 
         topicRepository.save(topic);
+        
         var uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicDetailsDTO(topic));
     }
