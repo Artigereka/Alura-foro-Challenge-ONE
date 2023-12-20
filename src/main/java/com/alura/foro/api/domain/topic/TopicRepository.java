@@ -1,5 +1,7 @@
 package com.alura.foro.api.domain.topic;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface TopicRepository extends JpaRepository<Topic, Long> {
 
     Boolean existsByTitleAndBody(String title, String body);
+
+    Page<Topic> findAll(Pageable pagination);
 
     Topic findByTitle(String title);
 
