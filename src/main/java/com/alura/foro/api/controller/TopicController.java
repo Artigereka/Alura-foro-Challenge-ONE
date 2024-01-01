@@ -34,7 +34,7 @@ public class TopicController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity createTopic(@RequestBody @Valid CreateTopicDTO createTopicDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<TopicDetailsDTO> createTopic(@RequestBody @Valid CreateTopicDTO createTopicDTO, UriComponentsBuilder uriBuilder){
 
         validTopic.forEach(v -> v.isDuplicated(createTopicDTO));
 
@@ -50,9 +50,24 @@ public class TopicController {
     public ResponseEntity<Page<TopicDetailsDTO>> readTopics(
             @PageableDefault (size = 5, direction = Direction.DESC) Pageable pagination){
 
-        var page = topicRepository.findAll(pagination).map(TopicDetailsDTO::new);
+        return ResponseEntity.ok(topicRepository.findAll(pagination).map(TopicDetailsDTO::new));
 
-        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TopicDetailsDTO> readOneTopic(@PathVariable Long id){
+
+        Topic topic = topicRepository.getReferenceById(id);
+
+        var topicData = new TopicDetailsDTO(
+                topic.getId(),
+                topic.getTitle(),
+                topic.getBody(),
+                topic.getAuthor(),
+                topic.getCourse()
+                );
+
+        return  ResponseEntity.ok(topicData);
 
     }
 
